@@ -150,8 +150,7 @@
         
         
     /*  FONT STYLING:  */
-        {block:IfUnderlineTextLinks}--textLinksDecoration: underline;{/block:IfUnderlineTextLinks}
-        {block:IfNotUnderlineTextLinks}--textLinksDecoration: none;{/block:IfNotUnderlineTextLinks}
+    
         --bodyFontFamily: '{select:Body font family}', 'Calibri', sans-serif;
         --bodyFontSize: {select:Body font size};
         --monospaceFontFamily: 'Share-TechMono', monospace;
@@ -216,7 +215,7 @@
     
     
     /*  CUSTOM SCROLLBAR:  */
-    {block:IfEnableCustomScrollbar}
+
     ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
@@ -236,7 +235,7 @@
         border-radius: 6px;
         background-color: rgb(var(--scrollbarColor));
     }
-    {/block:IfEnableCustomScrollbar}
+
 
 
 
@@ -575,14 +574,9 @@
                                                 </p>
                                             </div>
                                         </li>
-                                    {/block:Chat}
-                                    {block:Audio}
                                         <li class="trail-content">
                                             <div class="entry">
-                                                {block:AudioEmbed}
                                                     <div class="tmblr-embed">{AudioEmbed}</div>
-                                                {/block:AudioEmbed}
-                                                {block:AudioPlayer}
                                                     <div class="audio-wrapper{block:AlbumArt} has--cover{/block:AlbumArt}"{block:AlbumArt} style="background-image: url({AlbumArtURL})"{/block:AlbumArt}>
                                                         <div class="audioinfo">
                                                             {block:TrackName}<span class="trackname">{TrackName}</span>{/block:TrackName}
@@ -593,11 +587,8 @@
                                                             {AudioPlayer}
                                                         </div>
                                                     </div>
-                                                {/block:AudioPlayer}
                                             </div>
                                         </li>
-                                    {/block:Audio}
-                                    {block:Answer}
                                         <li class="trail-content-answer">
                                             <div class="answer-author-portrait">
                                                 <img src="{AskerPortraitURL-64}"/>
@@ -606,7 +597,6 @@
                                             <div class="answer-username">sent by {Asker}</div>
                                             <div class="entry">{Question}</div>
                                         </li>
-                                        {block:NotReblog}
                                         <li class="trail-content-answer">
                                             <div class="answer-author-portrait">
                                                 <img src="{PostAuthorPortraitURL-64}"/>
@@ -615,8 +605,6 @@
                                             <div class="answer-username">answered by {PostAuthorName}</div>
                                             <div class="entry">{Answer}</div>
                                         </li>
-                                        {/block:NotReblog}
-                                        {block:Answerer}
                                         <li class="trail-content-answer">
                                             <div class="answer-author-portrait">
                                                 <img src="{AnswererPortraitURL-64}"/>
@@ -625,10 +613,7 @@
                                             <div class="answer-username">answered by {Answerer}</div>
                                             <div class="entry">{Answer}</div>
                                         </li>
-                                        {/block:Answerer}
-                                    {/block:Answer}
                                 </ul>
-                                {block:RebloggedFrom}{block:Reblogs}
                                     <ul class="trail-block"{block:isOriginalEntry} style="display:none"{/block:isOriginalEntry}>
                                         <li class="trail-attribution">
                                             <div class="attr-author-portrait">
@@ -642,7 +627,6 @@
                                             <div class="entry">{Body}</div>
                                         </li>
                                     </ul>
-                                {/block:Reblogs}{/block:RebloggedFrom}
                             </section>
                             {block:Date}
                                 <section class="infotab-section">
@@ -651,8 +635,6 @@
                                             <div class="info-label"><span>posted</span></div>
 
                                             <div class="info-entry"><a href="{Permalink}">{TimeAgo}</a></div>
-                                        </li>
-                                        {block:RebloggedFrom}
                                         <li>
                                             <div class="info-label"><span>via</span></div>
                                             <div class="info-entry"><a href="{ReblogParentURL}" {Target}>{ReblogParentName}</a></div>
@@ -661,20 +643,14 @@
                                             <div class="info-label"><span>origin</span></div>
                                             <div class="info-entry"><a href="{ReblogRootURL}" {Target}>{ReblogRootName}</a></div>
                                         </li>
-                                        {/block:RebloggedFrom}
-                                        {block:HighRes}{block:Photo}
                                         <li>
                                             <div class="info-label"><span>high-res</span></div>
                                             <div class="info-entry"><a href="{PhotoURL-HighRes}" {Target}>view in high-res</a></div>
                                         </li>
-                                        {/block:Photo}{/block:HighRes}
-                                        {block:ContentSource}
                                         <li>
                                             <div class="info-label"><span>source</span></div>
                                             <div class="info-entry"><a href="{SourceURL}" {Target}>{SourceTitle}</a></div>
                                         </li>
-                                        {/block:ContentSource}
-                                        {block:HasTags}
                                         <li>
                                             <div class="info-label"><span>tags</span></div>
                                             <div class="info-entry tags">{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</div>
@@ -685,18 +661,14 @@
                                 {block:NoteCount}
                                     <section class="notetab-section"{block:IndexPage}{block:IfNotShowPostNotesTab} style="display:none"{/block:IfNotShowPostNotesTab}{/block:IndexPage}>
                                         <div class="notes-wrapper">
-                                            {block:IndexPage}
                                             <div class="notes-loading">Loading...</div>
                                             <div class="ajax-notes"></div>
-                                            {/block:IndexPage}
                                             {PostNotes-64}
                                         </div>
                                     </section>
                                 {/block:NoteCount}
                                 <ul class="permalink resetlist">
                                     <li class="nc_button">
-                                        {block:IndexPage}<a href="{Permalink}">{NoteCountWithLabel}</a>{/block:IndexPage}
-                                        {block:PermalinkPage}<label{block:NoteCount} for="notetab_{PostID}"{/block:NoteCount}>{NoteCountWithLabel}</label>{/block:PermalinkPage}
                                     </li>
                                     <li class="rb_button">
                                         <a href="{ReblogURL}" {Target}>reblog</a>
@@ -710,8 +682,6 @@
                             {/block:Date}
                         </div>
                     </article>
-                {/block:Posts}
-                {block:SearchPage}{block:NoSearchResults}
                     <article class="post">
                         <input type="radio" id="maintab_0" name="posttab_0" checked/>
                         <div class="tbutton-wrapper">
