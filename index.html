@@ -18,6 +18,87 @@
 -->
     
 
+{block:Options}
+<meta name="image:Background image" content="">
+<meta name="image:Sidebar image" content="">
+
+<meta name="color:Background" content="#f9eedd">
+<meta name="color:Borders" content="#839c99">
+<meta name="color:Box shadows" content="#efd2c4">
+<meta name="color:Body text" content="#839c99">
+<meta name="color:Bold text" content="#8c8499">
+<meta name="color:Italic text" content="#d6aeb0">
+<meta name="color:Headings" content="#588885">
+<meta name="color:Links" content="#222222">
+<meta name="color:Links hover" content="#efac9a">
+<meta name="color:Bullet points" content="#588885">
+<meta name="color:Blockquote borders" content="#588885">
+<meta name="color:Accent 1 bg" content="#cdd8c4">
+<meta name="color:Accent 1 text" content="#839c99">
+<meta name="color:Accent 2 bg" content="#9bbfcb">
+<meta name="color:Accent 2 text" content="#ffffff">
+<meta name="color:Post bg" content="#ffffff">
+<meta name="color:Post usernames bg" content="#fff0cd">
+<meta name="color:Post usernames text" content="#839c99">
+<meta name="color:Post audio player bg" content="#282828">
+<meta name="color:Post audio player text" content="#ffffff">
+<meta name="color:Post links overlay" content="#282828">
+<meta name="color:Post links overlay text" content="#ffffff">
+<meta name="color:Post poll bg" content="#fbccb1">
+<meta name="color:Post poll text" content="#588885">
+<meta name="color:Post pinned label" content="#c8e0e8">
+<meta name="color:Post pinned text" content="#839c99">
+<meta name="color:Sidebar image text" content="#839c99">
+<meta name="color:Sidebar blog title" content="#839c99">
+<meta name="color:Text selection" content="#ffffff">
+<meta name="color:Text selection bg" content="#fbccb1">
+<meta name="color:Scrollbar" content="#839c99">
+
+<meta name="select:Body font family" title="Share Tech Mono" content="Share Tech Mono">
+<meta name="select:Body font family" title="Times New Roman" content="Times New Roman">
+<meta name="select:Body font family" title="Times New Roman" content="Times New Roman">
+<meta name="select:Body font family" title="Times New Roman" content="Times New Roman">
+
+<meta name="select:Body font size" title="12px" content="12px">
+<meta name="select:Body font size" title="13px" content="13px">
+<meta name="select:Body font size" title="14px" content="14px">
+<meta name="select:Body font size" title="15px" content="15px">
+
+<meta name="select:Theme shape" title="heart" content="heart">
+<meta name="select:Theme shape" title="circle" content="circle">
+
+<meta name="select:Sidebar position" title="left" content="left">
+<meta name="select:Sidebar position" title="right" content="right">
+
+<meta name="select:Sidebar text align" title="center" content="center">
+<meta name="select:Sidebar text align" title="left" content="left">
+<meta name="select:Sidebar text align" title="right" content="right">
+
+<meta name="select:Sidebar info display" title="bio & menu" content="bothdisplay">
+<meta name="select:Sidebar info display" title="bio only" content="biodisplay">
+<meta name="select:Sidebar info display" title="menu only" content="menudisplay">
+<meta name="select:Sidebar info display" title="none" content="nonedisplay">
+
+<meta name="select:Pagination display" title="message box" content="mssg">
+<meta name="select:Pagination display" title="classic" content="clsc">
+
+<meta name="if:Enable custom scrollbar" content="1">
+<meta name="if:Show box shadows" content="1">
+<meta name="if:Show blog title" content="1">
+<meta name="if:Show post notes tab" content="1">
+<meta name="if:Underline text links" content="1">
+
+<meta name="text:Sidebar margin top" content="80px">
+
+<meta name="text:Custom link 1 label" content="Link 1">
+<meta name="text:Custom link 1 URL" content="URL">
+<meta name="text:Custom link 2 label" content="Link 2">
+<meta name="text:Custom link 2 URL" content="URL">
+<meta name="text:Custom link 3 label" content="Link 3">
+<meta name="text:Custom link 3 URL" content="URL">
+{/block:Options}
+
+
 <html lang="{block:English}en-US{/block:English}{block:German}de-DE{/block:German}{block:French}fr-FR{/block:French}{block:Italian}it-IT{/block:Italian}{block:Japanese}ja-JP{/block:Japanese}{block:Turkish}tr-TR{/block:Turkish}{block:Spanish}es-ES{/block:Spanish}{block:Russian}ru-RU{/block:Russian}{block:Polish}pl-PL{/block:Polish}{block:PortuguesePT}pt-PT{/block:PortuguesePT}{block:PortugueseBR}pt-BR{/block:PortugueseBR}{block:Dutch}nl-NL{/block:Dutch}{block:Korean}ko-KR{/block:Korean}{block:ChineseSimplified}zh-CN{/block:ChineseSimplified}{block:ChineseTraditional}zh-TW{/block:ChineseTraditional}{block:ChineseHK}zh-HK{/block:ChineseHK}{block:Indonesian}id-ID{/block:Indonesian}{block:Hindi}hi-IN{/block:Hindi}">
 
 
@@ -69,7 +150,8 @@
         
         
     /*  FONT STYLING:  */
-    
+        {block:IfUnderlineTextLinks}--textLinksDecoration: underline;{/block:IfUnderlineTextLinks}
+        {block:IfNotUnderlineTextLinks}--textLinksDecoration: none;{/block:IfNotUnderlineTextLinks}
         --bodyFontFamily: '{select:Body font family}', 'Calibri', sans-serif;
         --bodyFontSize: {select:Body font size};
         --monospaceFontFamily: 'Share-TechMono', monospace;
@@ -134,7 +216,7 @@
     
     
     /*  CUSTOM SCROLLBAR:  */
-
+    {block:IfEnableCustomScrollbar}
     ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
@@ -154,7 +236,7 @@
         border-radius: 6px;
         background-color: rgb(var(--scrollbarColor));
     }
-
+    {/block:IfEnableCustomScrollbar}
 
 
 
@@ -493,9 +575,14 @@
                                                 </p>
                                             </div>
                                         </li>
+                                    {/block:Chat}
+                                    {block:Audio}
                                         <li class="trail-content">
                                             <div class="entry">
+                                                {block:AudioEmbed}
                                                     <div class="tmblr-embed">{AudioEmbed}</div>
+                                                {/block:AudioEmbed}
+                                                {block:AudioPlayer}
                                                     <div class="audio-wrapper{block:AlbumArt} has--cover{/block:AlbumArt}"{block:AlbumArt} style="background-image: url({AlbumArtURL})"{/block:AlbumArt}>
                                                         <div class="audioinfo">
                                                             {block:TrackName}<span class="trackname">{TrackName}</span>{/block:TrackName}
@@ -506,8 +593,11 @@
                                                             {AudioPlayer}
                                                         </div>
                                                     </div>
+                                                {/block:AudioPlayer}
                                             </div>
                                         </li>
+                                    {/block:Audio}
+                                    {block:Answer}
                                         <li class="trail-content-answer">
                                             <div class="answer-author-portrait">
                                                 <img src="{AskerPortraitURL-64}"/>
@@ -516,6 +606,7 @@
                                             <div class="answer-username">sent by {Asker}</div>
                                             <div class="entry">{Question}</div>
                                         </li>
+                                        {block:NotReblog}
                                         <li class="trail-content-answer">
                                             <div class="answer-author-portrait">
                                                 <img src="{PostAuthorPortraitURL-64}"/>
@@ -524,6 +615,8 @@
                                             <div class="answer-username">answered by {PostAuthorName}</div>
                                             <div class="entry">{Answer}</div>
                                         </li>
+                                        {/block:NotReblog}
+                                        {block:Answerer}
                                         <li class="trail-content-answer">
                                             <div class="answer-author-portrait">
                                                 <img src="{AnswererPortraitURL-64}"/>
@@ -532,7 +625,10 @@
                                             <div class="answer-username">answered by {Answerer}</div>
                                             <div class="entry">{Answer}</div>
                                         </li>
+                                        {/block:Answerer}
+                                    {/block:Answer}
                                 </ul>
+                                {block:RebloggedFrom}{block:Reblogs}
                                     <ul class="trail-block"{block:isOriginalEntry} style="display:none"{/block:isOriginalEntry}>
                                         <li class="trail-attribution">
                                             <div class="attr-author-portrait">
@@ -546,6 +642,7 @@
                                             <div class="entry">{Body}</div>
                                         </li>
                                     </ul>
+                                {/block:Reblogs}{/block:RebloggedFrom}
                             </section>
                             {block:Date}
                                 <section class="infotab-section">
@@ -554,6 +651,8 @@
                                             <div class="info-label"><span>posted</span></div>
 
                                             <div class="info-entry"><a href="{Permalink}">{TimeAgo}</a></div>
+                                        </li>
+                                        {block:RebloggedFrom}
                                         <li>
                                             <div class="info-label"><span>via</span></div>
                                             <div class="info-entry"><a href="{ReblogParentURL}" {Target}>{ReblogParentName}</a></div>
@@ -562,14 +661,20 @@
                                             <div class="info-label"><span>origin</span></div>
                                             <div class="info-entry"><a href="{ReblogRootURL}" {Target}>{ReblogRootName}</a></div>
                                         </li>
+                                        {/block:RebloggedFrom}
+                                        {block:HighRes}{block:Photo}
                                         <li>
                                             <div class="info-label"><span>high-res</span></div>
                                             <div class="info-entry"><a href="{PhotoURL-HighRes}" {Target}>view in high-res</a></div>
                                         </li>
+                                        {/block:Photo}{/block:HighRes}
+                                        {block:ContentSource}
                                         <li>
                                             <div class="info-label"><span>source</span></div>
                                             <div class="info-entry"><a href="{SourceURL}" {Target}>{SourceTitle}</a></div>
                                         </li>
+                                        {/block:ContentSource}
+                                        {block:HasTags}
                                         <li>
                                             <div class="info-label"><span>tags</span></div>
                                             <div class="info-entry tags">{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</div>
@@ -580,14 +685,18 @@
                                 {block:NoteCount}
                                     <section class="notetab-section"{block:IndexPage}{block:IfNotShowPostNotesTab} style="display:none"{/block:IfNotShowPostNotesTab}{/block:IndexPage}>
                                         <div class="notes-wrapper">
+                                            {block:IndexPage}
                                             <div class="notes-loading">Loading...</div>
                                             <div class="ajax-notes"></div>
+                                            {/block:IndexPage}
                                             {PostNotes-64}
                                         </div>
                                     </section>
                                 {/block:NoteCount}
                                 <ul class="permalink resetlist">
                                     <li class="nc_button">
+                                        {block:IndexPage}<a href="{Permalink}">{NoteCountWithLabel}</a>{/block:IndexPage}
+                                        {block:PermalinkPage}<label{block:NoteCount} for="notetab_{PostID}"{/block:NoteCount}>{NoteCountWithLabel}</label>{/block:PermalinkPage}
                                     </li>
                                     <li class="rb_button">
                                         <a href="{ReblogURL}" {Target}>reblog</a>
@@ -601,6 +710,8 @@
                             {/block:Date}
                         </div>
                     </article>
+                {/block:Posts}
+                {block:SearchPage}{block:NoSearchResults}
                     <article class="post">
                         <input type="radio" id="maintab_0" name="posttab_0" checked/>
                         <div class="tbutton-wrapper">
@@ -712,83 +823,4 @@
 
 
 </body>
-<head>
-        <meta charset = "utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content = "IE=edge">
-        <meta name="viewport" content="width=device-width", initial-scale="1.0">
-        <title>¿Qué monstruo eres?</title>
-</head>
-        <script>
-            let nombre
-            nombre = prompt("¿Cómo te llamas?")
-            alert("¡Bienvenide, " + nombre + "!")
-            let monstruo
-            monstruo = prompt("¿Cuál es tu monstruo favorito?")
-            alert("Está bien. Averigüemos si eres eso...")
-            alert("ANALIZANDO...")
-            alert("¡Vaya! ¿Has dicho '" + monstruo.toLowerCase() + "', " + nombre + "...? ¡Eso no es lo que pone aquí!")
-            alert("Según mis cálculos...")
-            
-            var tad1 = new Array(" une vampire ", " une licántrope ", " une sirena ", " une kraken ", " une dragone ", " une súcube ", " une banshee ", " une trol ", " une yeti ", " une chupacabras ", " une monstruo del Lago Ness ", " une goblin ", " une gorrarroja ", " une kelpie ", " une persona polilla ", " une yokai ", " une cambiaformas ");
-
-            function getRandomWord1(min, max) {
-            var n = Math.floor(Math.random() * (max - min + 1)) + min;   
-            var words ="";
-            //Obtiene palabras del array de acuerdo al valor obtenido como n.
-            for (i = 0; i < n; i++) {
-                words += tad1[Math.floor(Math.random() * tad1.length)];
-            }
-            return words;
-            }
-
-            var tad2 = new Array("gay", "bisexual", "lesbiana", "ace", "trans", "no binarie", "influencer", "proletarie", "hipocondríaque", "guapísime", "astrólogue", "deprimide", "intolerante a la lactosa", "que canta ópera", "fan del karaoke", "celiaque", "alérgique a las nueces", "con un doctorado", "amante de los musicales", "fan de Taylor Swift", "fan de BTS", "con un truma con J.K. Rowling", "con un trauma con La Canción de Aquiles", "granjere", "eurofan (pero odia Israel)");
-
-            function getRandomWord2(min, max) {
-            var n = Math.floor(Math.random() * (max - min + 1)) + min;   
-            var words ="";
-            //Obtiene palabras del array de acuerdo al valor obtenido como n.
-            for (i = 0; i < n; i++) {
-                words += tad2[Math.floor(Math.random() * tad2.length)];
-            }
-            return words;
-            }
-            
-            var tad3 = new Array(" heredere de la fortuna de Carmen Lomana.", "... muy, muy fee.", " que dice que 'no le importa' pero se pasa tres días pensando en ello.", " que tiene diez tentáculos.", " que tiene quince colas.", ", pero GUAPÍSIME.", " en Madrid.", " que tiene miedo a las alturas.", " que tiene miedo al agua.", " que tiene una perdida de su jefe.", " que tiene que responder a un correo urgente.", " que juega a D&D", ". Realmente ODIA a Isarel.", " con un crush.");
-
-            function getRandomWord3(min, max) {
-            var n = Math.floor(Math.random() * (max - min + 1)) + min;   
-            var words ="";
-            //Obtiene palabras del array de acuerdo al valor obtenido como n.
-            for (i = 0; i < n; i++) {
-                words += tad3[Math.floor(Math.random() * tad3.length)];
-            }
-            return words;
-            }
-
-            var tad4 = new Array(" Aries.", " Leo.", " Libra.", " Piscis.", " Tauro.", " Escorpio.", " Géminis.", " Virgo.", " Capricornio.", " Cáncer.", " Acuario.", " Sagitario.")
-
-            function getRandomWord4(min, max) {
-            var n = Math.floor(Math.random() * (max - min + 1)) + min;   
-            var words ="";
-            //Obtiene palabras del array de acuerdo al valor obtenido como n.
-            for (i = 0; i < n; i++) {
-                words += tad4[Math.floor(Math.random() * tad4.length)];
-            }
-            return words;
-            }
-
-            var tad5 = new Array(" ¿¡Cómo te quedas!? ¡Cabezológico total!", " ¡Enséñame cómo lo haces! ¡Es cabezológico total!", " Qué fuerte... ¡Cabezológico total!", " Esto da para relato. ¡Cabezológico total!", " Increíble. ¡Cabezológico total!", " ¡Oh, guau! ¡Cabezológico total!",)
-
-            function getRandomWord5(min, max) {
-            var n = Math.floor(Math.random() * (max - min + 1)) + min;   
-            var words ="";
-            //Obtiene palabras del array de acuerdo al valor obtenido como n.
-            for (i = 0; i < n; i++) {
-                words += tad5[Math.floor(Math.random() * tad5.length)];
-            }
-            return words;
-            }
-
-            alert("Eres" + getRandomWord1(1, 1) + getRandomWord2(1, 1) + getRandomWord3(1, 1) + " ¿Tu signo?" + getRandomWord4(1, 1) + getRandomWord5(1, 1));
-        </script>
 </html>
